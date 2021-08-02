@@ -7,6 +7,6 @@ ReactDOM.render(
   //   <App />
   // </React.StrictMode>,
   <App />,
-  document.getElementById("potato")
+  document.getElementById("root")
 );
 
