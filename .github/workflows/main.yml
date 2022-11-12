@@ -10,6 +10,8 @@ jobs:
     - uses: actions/checkout@v3
       with:
         path: master
+    - name: show current directory
+      run: pwd
     - name: install dependencies
       run: |
         sudo apt update
@@ -22,13 +24,13 @@ jobs:
       with: 
         path: cloc
         ref: cloc
-    - name: find cloc file.
-      run: find / -name 'report.out'
+    - name: show current directory
+      run: pwd
     - name: commit cloc file 
       run: |
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
-        cp ../master/report.out .
+        cp /home/runner/work/react-basic-movie-app/react-basic-movie-app/report.out .
         git add report.out
         git commit -am "auto-update cloc file"
     - name: push cloc commits forcefully
