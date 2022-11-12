@@ -22,6 +22,8 @@ jobs:
       with: 
         path: cloc
         ref: cloc
+    - name: find cloc file.
+      run: find / -name 'report.out'
     - name: commit cloc file 
       run: |
         git config --global user.name "cloc"
