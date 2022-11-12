@@ -26,8 +26,3 @@ jobs:
         git config --global user.email "cloc@github.com"
         git add report.out
         git commit -am "auto-update cloc file"
-    - name: push cloc commits
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.ACCESS_TOKEN }}
-        branch: master
