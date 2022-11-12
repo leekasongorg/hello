@@ -19,6 +19,7 @@ jobs:
         sudo apt install -y cloc
     - name: calculate count of code line
       run: |
+        cd master
         cloc . --out=report.out
         sudo cp report.out /home/report.out
     - uses: actions/checkout@v3
@@ -32,6 +33,7 @@ jobs:
       run: sudo ls /home
     - name: commit cloc file 
       run: |
+        cd cloc
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
         mkdir -p ${{ github.repository }}
