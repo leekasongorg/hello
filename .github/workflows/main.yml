@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        path: master
     - name: install dependencies
       run: |
         sudo apt update
@@ -15,14 +17,18 @@ jobs:
     - name: calculate count of code line
       run: |
         cloc . --out=report.out
-    - name: checkout cloc branch and commit
+    - name: checkout cloc branch
+      uses: actions/checkout@v3
+      with: 
+        path: cloc
+        ref: cloc
+    - name: commit cloc file 
       run: |
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
-        git checkout cloc
+        cp ../master/report.out .
         git add report.out
         git commit -am "auto-update cloc file"
     - name: push cloc commits forcefully
       run: |
         git push origin cloc --force
-      
