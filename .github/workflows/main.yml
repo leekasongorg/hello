@@ -9,7 +9,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        path: master
         persist-credentials: false
         fetch-depth: 0
     - name: show current directory
@@ -20,12 +19,10 @@ jobs:
         sudo apt install -y cloc
     - name: calculate count of code line
       run: |
-        cd master
         cloc . --out=report.out
         sudo cp report.out /home/report.out
     - uses: actions/checkout@v3
       with:
-        path: cloc
         repository: leekasongorg/cloc
         fetch-depth: 0
     - name: show current directory
@@ -34,7 +31,6 @@ jobs:
       run: sudo ls /home
     - name: commit cloc file 
       run: |
-        cd cloc
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
         mkdir -p ${{ github.repository }}
