@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        path: master
+        fetch-depth: 0
     - name: show current directory
       run: pwd
     - name: install dependencies
@@ -17,10 +20,22 @@ jobs:
     - name: calculate count of code line
       run: |
         cloc . --out=report.out
+        sudo cp report.out /home/report.out
+    - uses: actions/checkout@v3
+      with:
+        path: cloc
+        repository: leekasongorg/cloc
+        fetch-depth: 0
+    - name: show current directory
+      run: pwd
+    - name: list file
+      run: sudo ls /home
     - name: commit cloc file 
       run: |
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
-        git add report.out
+        mkdir -p ${{ github.repository }}
+        ls
+        sudo cp /home/report.out ./${{ github.repository }}
+        sudo chmod 777 ./${{ github.repository }}
         git commit -am "auto-update cloc file"
-        git push
