@@ -42,3 +42,4 @@ jobs:
         sudo chmod 777 ./${{ github.repository }}
         git add -A
         git commit -am "auto-update cloc file"
+        git push
