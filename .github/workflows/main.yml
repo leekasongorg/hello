@@ -11,6 +11,8 @@ jobs:
       with:
         persist-credentials: false
         fetch-depth: 0
+        path: master
+        token: ${{ secrets.ACCESS_TOKEN }}
     - name: show current directory
       run: pwd
     - name: install dependencies
@@ -19,18 +21,22 @@ jobs:
         sudo apt install -y cloc
     - name: calculate count of code line
       run: |
+        cd master
         cloc . --out=report.out
         sudo cp report.out /home/report.out
     - uses: actions/checkout@v3
       with:
         repository: leekasongorg/cloc
         fetch-depth: 0
+        path: cloc
+        token: ${{ secrets.ACCESS_TOKEN }}
     - name: show current directory
       run: pwd
     - name: list file
       run: sudo ls /home
     - name: commit cloc file 
       run: |
+        cd cloc
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
         mkdir -p ${{ github.repository }}
@@ -39,7 +45,4 @@ jobs:
         sudo chmod 777 ./${{ github.repository }}
         git add -A
         git commit -am "auto-update cloc file"
-    - name: push cloc
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.ACCESS_TOKEN }}
+        git push
