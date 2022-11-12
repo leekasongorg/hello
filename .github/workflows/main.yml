@@ -17,8 +17,8 @@ jobs:
         cloc . --out=report.out
     - name: checkout cloc branch and commit
       run: |
-        git config --global user.name="cloc"
-        git config --global user.email="cloc@github.com"
+        git config --global user.name "cloc"
+        git config --global user.email "cloc@github.com"
         git checkout cloc
         git add report.out
         git commit -am "auto-update cloc file"
