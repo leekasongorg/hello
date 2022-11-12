@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+        fetch-depth: 0
     - name: show current directory
       run: pwd
     - name: install dependencies
@@ -24,5 +27,7 @@ jobs:
         git add report.out
         git commit -am "auto-update cloc file"
     - name: push cloc commits
-      run: |
-        git push origin master
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.ACCESS_TOKEN }}
+        branch: master
