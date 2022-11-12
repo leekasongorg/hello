@@ -24,5 +24,7 @@ jobs:
       run: |
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
+        git checkout cloc
         git add report.out
         git commit -am "auto-update cloc file"
+        git push origin cloc
