@@ -8,9 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        persist-credentials: false
-        fetch-depth: 0
     - name: show current directory
       run: pwd
     - name: install dependencies
@@ -24,7 +21,6 @@ jobs:
       run: |
         git config --global user.name "cloc"
         git config --global user.email "cloc@github.com"
-        git checkout cloc
         git add report.out
         git commit -am "auto-update cloc file"
-        git push origin cloc
+        git push
