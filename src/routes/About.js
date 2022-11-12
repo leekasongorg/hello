@@ -5,7 +5,7 @@ function About(){
     return (
         <div className="about__container">
             <span>"this is my first react homepage
-                react is soooooo amazing!"</span>
+                react is so amazing!"</span>
         </div>
     )
 }
